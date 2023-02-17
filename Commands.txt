@@ -1,0 +1,14 @@
+# Build image
+docker/podman build -t linux-cpp .
+
+# Run image
+# -it -> interactive, to give a tty to the image
+# --rm -> Remove old image (cleanup) since build is going to generate a new one after is executed again
+docker/podman run -it --name cpp-dev --rm linux-cpp
+
+# Usually, we want to have code on local machine, for that we need to mount directory
+# -v --> for mounting directory in container
+docker/podmman run -it --name cpp-dev --rm -v ${PWD}:/develop linux-cpp
+
+# Ideally, we would like to open port or redirect ports
+TBD
