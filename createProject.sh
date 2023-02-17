@@ -15,6 +15,10 @@ The possible flags are:
     - n name of project (required)
     
     "
+# Utilities functions
+err() {
+  echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: $*" >&2
+}
 
 # Check if required arguments are provided
 options=':hn:'
@@ -22,20 +26,20 @@ while getopts $options option; do
     case "$option" in
         h) echo "$usage"; exit;;
         n) PROJECT_NAME=$OPTARG;;
-        :) printf "Missing argument for -%s\n" "$OPTARG" >&1; echo "$usage" >&1; exit 1;;
-        \?) printf "Illegal option: -%s\n" "$OPTARG" >&1; echo "$usage" >&1; exit 1;;
+        :) err "Missing argument for -%s\n" "$OPTARG" >&1; echo "$usage" >&2; exit 1;;
+        \?) err "Illegal option: -%s\n" "$OPTARG" >&1; echo "$usage" >&2; exit 1;;
     esac
 done
 
 # Required arguments
 if [ ! "$PROJECT_NAME" ]; then
-    echo "Arguments -n must be provided"
-    echo "$usage" >&1; exit 1
+    err "Arguments -n must be provided"
+    echo "$usage" >&2; exit 1
 fi
 
 # Check if the folder with the name PROJECT_NAME exists
 if [ -d "$PROJECT_NAME" ]; then
-  echo "Error: There is already a file with that name!"; exit 1
+  err "Error: There is already a file with that name!"; exit 1
 fi
 
 # Create Project Structure and script to run it
