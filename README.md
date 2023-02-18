@@ -25,4 +25,4 @@ If you find yourself with the following error when trying to run the `createProj
 
 You might need to run this command due to bad line endings:
 
-`sed -i -e 's/\r$//' "$PROJECT_NAME"_compile_and_run.sh`
+`sed -i -e 's/\r$//' createProject.sh`
