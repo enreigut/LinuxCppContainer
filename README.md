@@ -16,3 +16,13 @@ This will generate a simple project structure:
 ```
 
 To compile and run the program you just need to execute the _`PROJECT_NAME_compile_and_run.sh`_. This will generate the `.o` file inside the builds folder.
+
+# Errors
+
+If you find yourself with the following error when trying to run the `createProject.sh`:
+
+`/bin/bash: bad interpreter: no such file or directory`
+
+You might need to run this command due to bad line endings:
+
+`sed -i -e 's/\r$//' "$PROJECT_NAME"_compile_and_run.sh`
